@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Test - KNUST Enterprise Hub</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background-color: #f8f9fa;
+        }
+        .image-container {
+            margin: 20px 0;
+            padding: 20px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .image-test {
+            max-width: 200px;
+            height: auto;
+            border: 2px solid #ddd;
+            border-radius: 4px;
+        }
+        .status {
+            margin-top: 10px;
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-weight: bold;
+        }
+        .status.success {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        .status.error {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+    </style>
+</head>
+<body>
+    <h1>Image Loading Test</h1>
+    <p>This page tests if the KNUST and KSE logos are loading correctly.</p>
+
+    <div class="image-container">
+        <h3>KNUST Logo Test</h3>
+        <img src="img2/knust.PNG" alt="KNUST Logo" class="image-test" id="knustLogo">
+        <div class="status" id="knustStatus">Loading...</div>
+    </div>
+
+    <div class="image-container">
+        <h3>KSE Logo Test</h3>
+        <img src="img2/kselogo.png" alt="KSE Logo" class="image-test" id="kseLogo">
+        <div class="status" id="kseStatus">Loading...</div>
+    </div>
+
+    <div class="image-container">
+        <h3>Alternative Path Test</h3>
+        <p>Trying different path variations:</p>
+        <img src="./img2/knust.PNG" alt="KNUST Logo (relative)" class="image-test">
+        <img src="../img2/knust.PNG" alt="KNUST Logo (parent)" class="image-test">
+    </div>
+
+    <script>
+        // Test image loading
+        function testImage(imgElement, statusElement, imageName) {
+            imgElement.onload = function() {
+                statusElement.textContent = `✅ ${imageName} loaded successfully`;
+                statusElement.className = 'status success';
+            };
+            
+            imgElement.onerror = function() {
+                statusElement.textContent = `❌ ${imageName} failed to load`;
+                statusElement.className = 'status error';
+            };
+        }
+
+        // Test both images
+        testImage(
+            document.getElementById('knustLogo'),
+            document.getElementById('knustStatus'),
+            'KNUST Logo'
+        );
+        
+        testImage(
+            document.getElementById('kseLogo'),
+            document.getElementById('kseStatus'),
+            'KSE Logo'
+        );
+
+        // Log current page URL for debugging
+        console.log('Current page URL:', window.location.href);
+        console.log('Image paths being tested:');
+        console.log('- img2/knust.PNG');
+        console.log('- img2/kselogo.png');
+    </script>
+</body>
+</html>
